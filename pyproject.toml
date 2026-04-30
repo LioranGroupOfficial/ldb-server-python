@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "liorandb-server-windows"
+version = "0.1.0"
+description = "Installer for the LioranDB Windows portable server ZIP."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Proprietary" }
+authors = [{ name = "Lioran Group Official" }]
+keywords = ["liorandb", "windows", "installer", "server"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: Microsoft :: Windows",
+  "License :: Other/Proprietary License",
+]
+
+[project.urls]
+Repository = "https://github.com/LioranGroupOfficial/Liorandb"
+
+[project.scripts]
+liorandb-server-windows = "liorandb_server_windows.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
