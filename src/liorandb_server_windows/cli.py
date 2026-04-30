@@ -6,7 +6,6 @@ from typing import List, Optional
 
 from .installer import (
     DEFAULT_TARGET_DIR,
-    DEFAULT_ZIP_URL,
     add_to_path,
     install,
 )
@@ -20,11 +19,25 @@ def _build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=False)
 
     p_install = sub.add_parser("install", help="Download and install LioranDB server.")
-    p_install.add_argument("--url", default=DEFAULT_ZIP_URL, help="ZIP download URL.")
+    p_install.add_argument(
+        "--url",
+        default=None,
+        help="Override ZIP download URL (normally resolved from the release manifest).",
+    )
+    p_install.add_argument(
+        "--manifest-url",
+        default=None,
+        help="Release manifest URL (default: https://db.lioransolutions.com/release.json).",
+    )
+    p_install.add_argument(
+        "--channel",
+        default=None,
+        help="Release channel (default: manifest defaultChannel).",
+    )
     p_install.add_argument(
         "--target",
         default=DEFAULT_TARGET_DIR,
-        help=r"Install folder (default: C:\LioranDB-Server).",
+        help=r"Install folder (default: %USERPROFILE%\.liorandb).",
     )
     p_install.add_argument(
         "--path-scope",
@@ -75,6 +88,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             url=args.url,
             target_dir=args.target,
             path_scope=args.path_scope,
+            manifest_url=args.manifest_url or None,
+            channel=args.channel or None,
             force=args.force,
             keep_zip=args.keep_zip,
         )

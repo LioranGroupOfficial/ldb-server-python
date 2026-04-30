@@ -2,6 +2,8 @@
 
 This package installs the **LioranDB Windows portable ZIP** and (optionally) adds the install folder to your PATH.
 
+It resolves the **latest Windows ZIP** from `https://db.lioransolutions.com/release.json` (default channel), and will **not download again** if the latest version is already installed in the target folder.
+
 ## Install
 
 ```powershell
@@ -10,7 +12,7 @@ py -m pip install liorandb-server-windows
 
 ## One-command setup (recommended)
 
-Installs into `C:\LioranDB-Server`, adds it to **User** PATH, and tells you what to run next:
+Installs into `%USERPROFILE%\.liorandb`, adds it to **User** PATH, and tells you what to run next:
 
 ```powershell
 liorandb-server-windows
@@ -43,7 +45,7 @@ if (-not ($p -split ';' | Where-Object { $_.TrimEnd('\') -ieq $dir.TrimEnd('\') 
 Or via this package:
 
 ```powershell
-liorandb-server-windows add-to-path --target C:\LioranDB-Server
+liorandb-server-windows add-to-path --target $env:USERPROFILE\.liorandb
 ```
 
 Open a new terminal afterwards.
