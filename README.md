@@ -5,7 +5,7 @@ This package installs the **LioranDB Windows portable ZIP** and (optionally) add
 ## Install
 
 ```powershell
-pip install liorandb-server-windows
+py -m pip install liorandb-server-windows
 ```
 
 ## One-command setup (recommended)
@@ -14,6 +14,12 @@ Installs into `C:\LioranDB-Server`, adds it to **User** PATH, and tells you what
 
 ```powershell
 liorandb-server-windows
+```
+
+If that command is not found (your Python Scripts folder isn’t on PATH), run:
+
+```powershell
+py -m liorandb_server_windows
 ```
 
 Open a **new terminal**, then run:
@@ -41,6 +47,18 @@ liorandb-server-windows add-to-path --target C:\LioranDB-Server
 ```
 
 Open a new terminal afterwards.
+
+## Fix “command not found” for `liorandb-server-windows`
+
+Add Python’s Scripts directory to **User** PATH:
+
+```powershell
+$scripts = py -c "import sysconfig; print(sysconfig.get_path('scripts'))"
+$p = [Environment]::GetEnvironmentVariable('Path','User')
+if (-not ($p -split ';' | Where-Object { $_.TrimEnd('\') -ieq $scripts.TrimEnd('\') })) {
+  [Environment]::SetEnvironmentVariable('Path', ($p + ';' + $scripts), 'User')
+}
+```
 
 ## CLI help
 

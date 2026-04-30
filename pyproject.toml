@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "liorandb-server-windows"
-version = "0.1.0"
+version = "0.1.1"
 description = "Installer for the LioranDB Windows portable server ZIP."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -28,4 +28,3 @@ package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
